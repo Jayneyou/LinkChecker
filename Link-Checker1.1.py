@@ -1,11 +1,5 @@
-
-#Final version...
-
-#LinkChecker 1.0
-
-#Tkinter tester
+#LinkChecker 1.1
 # Integrated PDF and Webpage
-
 
 import tkinter as tk
 from tkinter import ttk
@@ -25,7 +19,6 @@ import os
 import threading
 
 
-
 # button to browse file
 def browseFile():
     filePath = filedialog.askopenfilename(filetypes=[("PDF files", "*.pdf")])
@@ -37,16 +30,8 @@ def browseFile():
 #update radio button output value
 def radio():
     value = radioSelect.get()
-    #print(value)
     resultText.insert(tk.END, f"radio value: {value}\n")
-    #new = tk.Label(root,text=value)
-    #new.pack()
-
-
-#decide which program to run, PDF or WEB
-#def programFilter():
-    
-    
+  
 #global lists for WebPage linkchecker
 masterGood = []
 masterBad = []
@@ -55,8 +40,6 @@ masterFilter = []
 
 #TK controls
 running = 0
-    
-
 
 # create gui tkinter window
 root = tk.Tk()
@@ -65,13 +48,9 @@ root.geometry("600x600")
 root.title("Link Checker")
 style = ttk.Style()
 style.theme_use('alt')
-#'classic', 'alt'
 
 
-
-
-
-# PDF - linkchecker
+# PDF - linkchecker (Jayne You)
 #----------------------------------------------------
 # async check link run
 def checkLinks():
@@ -124,8 +103,6 @@ async def runCheckLinks():
                 pass
             except UnicodeError as e:
                 pass
-            except:
-                pass
 
         # check urls async
         async def checkUrls():
@@ -158,12 +135,9 @@ async def runCheckLinks():
                 # write in txt file
                 outputTxt.write(f"Link: {url}\nPages: {pagesStr}\nReasons: {reasonsStr}\n\n")
 
-
             resultText.insert(tk.END, f"Total broken links: {len(brokenUrls)}\n")
             resultText.insert(tk.END, f"Total links: {len(totalUrls)}\n")
-
             
-
         # main
         getUrls()
         await checkUrls()
@@ -178,7 +152,7 @@ async def runCheckLinks():
 
 
 
-# WebPage Linkchecker
+# WebPage Linkchecker (Carter McCauley)
 #------------------------------------------------------
 #grab website main page, as internal data.
 def getHtml(webSite):
